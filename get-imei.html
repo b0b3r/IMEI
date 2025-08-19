@@ -137,6 +137,64 @@
                     window.innerWidth <= 768;
          }
          
+         // Определяем операционную систему
+         function getOperatingSystem() {
+             const userAgent = navigator.userAgent;
+             
+             if (/iPhone|iPad|iPod/i.test(userAgent)) {
+                 return 'iOS';
+             } else if (/Android/i.test(userAgent)) {
+                 return 'Android';
+             } else if (/Windows Phone/i.test(userAgent)) {
+                 return 'WindowsPhone';
+             } else if (/BlackBerry/i.test(userAgent)) {
+                 return 'BlackBerry';
+             } else {
+                 return 'Unknown';
+             }
+         }
+         
+         // Получаем правильную команду для IMEI в зависимости от ОС
+         function getIMEICommand() {
+             const os = getOperatingSystem();
+             
+             switch (os) {
+                 case 'iOS':
+                     // Для iOS используем закодированную версию
+                     return 'tel:%2A%2306%23';
+                 case 'Android':
+                 case 'WindowsPhone':
+                 case 'BlackBerry':
+                     // Для Android и других используем обычную версию
+                     return 'tel:*#06#';
+                 default:
+                     // По умолчанию используем Android версию
+                     return 'tel:*#06#';
+             }
+         }
+         
+         // Обновляем ссылку на кнопке IMEI
+         function updateIMEIButton() {
+             const imeiButton = document.querySelector('#imei-button');
+             if (imeiButton) {
+                 const imeiCommand = getIMEICommand();
+                 imeiButton.href = imeiCommand;
+                 
+                 // Добавляем информацию в консоль для отладки
+                 console.log('OS detected:', getOperatingSystem());
+                 console.log('IMEI command:', imeiCommand);
+                 
+                 // Добавляем обработчик клика для дополнительной надежности
+                 imeiButton.addEventListener('click', function(e) {
+                     // Если по какой-то причине href не сработал, используем window.location
+                     if (imeiButton.href === '#' || imeiButton.href === window.location.href) {
+                         e.preventDefault();
+                         window.location.href = imeiCommand;
+                     }
+                 });
+             }
+         }
+         
          // Применяем стили для мобильных устройств
          function applyMobileStyles() {
              if (isMobile()) {
@@ -159,7 +217,10 @@
          }
          
          // Применяем стили при загрузке и изменении размера окна
-         window.addEventListener('load', applyMobileStyles);
+         window.addEventListener('load', function() {
+             applyMobileStyles();
+             updateIMEIButton();
+         });
          window.addEventListener('resize', applyMobileStyles);
      </script>
  </head>
@@ -204,9 +265,9 @@
          <div class="phone-section">
            <div class="phone-image"></div>
            
-           <a href="tel:*#06#" class="show-imei-button">
-             Показать IMEI
-           </a>
+                       <a href="#" class="show-imei-button" id="imei-button">
+              Показать IMEI
+            </a>
            
            <p class="form-subtitle">
              Нажмите показать IMEI и откроется экран<br>
