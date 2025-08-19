@@ -1,0 +1,27 @@
+:root {
+  --color-text-primary: #1d2023;
+  --color-text-secondary: #626c77;
+  --color-text-tertiary: #969fa8;
+  --color-link: #0070e5;
+  --color-accent: #ff0032;
+  --color-background-light: #ffffff;
+  --color-background-input: #f2f3f7;
+  --color-background-button-disabled: rgba(188, 195, 208, 0.5);
+  --color-background-close-btn: rgba(255, 255, 255, 0.08);
+  --color-border-focused: #007cff;
+  --font-family-wide: "MTS Wide", sans-serif;
+  --font-family-compact: "MTS Compact", sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family-compact), sans-serif;
+  background-color: #e5e5e5;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}

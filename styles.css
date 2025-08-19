@@ -1,0 +1,378 @@
+/* Дополнительные CSS переменные */
+:root {
+  --color-border-default: rgba(188, 195, 208, 0.5);
+  --color-background-page: #f2f3f7;
+}
+
+/* Шрифты подключены через fonts.css */
+
+/* Дополнительные общие стили */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--color-background-page);
+    align-items: center;
+    /* padding: 20px; */
+}
+
+/* Общие стили для страниц */
+.page-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.page {
+    max-width: 375px;
+    width: 100%;
+    height: 812px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(90deg, #A0BDF3 0%, #B4C2F4 100%);
+}
+
+/* Header с браузером */
+.browser-header {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    height: 88px;
+    background: transparent;
+    border-radius: 16px 16px 0 0;
+    /* Обеспечиваем правильное отображение */
+    /* border-bottom: 1px solid rgba(0, 0, 0, 0.1); */
+}
+
+.browser-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.browser-icon {
+    width: 32px;
+    height: 32px;
+    background: var(--color-accent);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.browser-icon img {
+    width: 24px;
+    height: 24px;
+    filter: brightness(0) invert(1);
+}
+
+.browser-title {
+    width: 24px;
+    height: 16px;
+}
+
+/* Основной контент */
+.form-container {
+    position: relative;
+    z-index: 1;
+    background-color: var(--color-background-light);
+    border-radius: 32px 32px 0 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    align-items: center;
+    /* Обеспечиваем видимость скруглений */
+    overflow: hidden;
+    margin-top: -1px; /* Компенсируем border браузера */
+}
+
+.form-header {
+    margin-bottom: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: left;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-icon {
+    width: 67px;
+    height: 32px;
+}
+
+.logo-text {
+    font-family: var(--font-family-wide);
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 28px;
+    color: var(--color-text-primary);
+}
+
+.form-title {
+    font-family: var(--font-family-wide);
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    color: var(--color-text-primary);
+    margin: 0 0 12px 0;
+    text-align: left;
+}
+
+.form-subtitle {
+    font-family: var(--font-family-compact);
+    font-size: 17px;
+    line-height: 24px;
+    color: var(--color-text-secondary);
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+/* Форма входа */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    align-items: left;
+}
+
+/* Поле ввода телефона */
+.input-field {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background-color: var(--color-background-input);
+    border: 1px solid var(--color-border-focused);
+    border-radius: 16px;
+    padding: 14px 16px;
+    height: 52px;
+    position: relative;
+    width: 100%;
+    max-width: 335px;
+}
+
+.input-field .country-code {
+    font-family: var(--font-family-compact);
+    font-size: 17px;
+    line-height: 24px;
+    color: var(--color-text-primary);
+}
+
+.input-field input {
+    flex-grow: 1;
+    border: none;
+    background: transparent;
+    outline: none;
+    font-family: var(--font-family-compact);
+    font-size: 17px;
+    line-height: 24px;
+    color: var(--color-text-primary);
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.input-field input::placeholder {
+    color: var(--color-text-tertiary);
+}
+
+/* Валидация */
+.validation-check {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    background: #4CAF50;
+    border-radius: 50%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.validation-check::after {
+    content: '✓';
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.validation-check.show {
+    display: flex;
+}
+
+/* Кнопка отправки */
+.submit-button {
+    padding: 18px 14px;
+    background-color: var(--color-background-button-disabled);
+    border: none;
+    border-radius: 16px;
+    font-family: var(--font-family-wide);
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0.05em;
+    color: var(--color-text-tertiary);
+    text-align: center;
+    cursor: not-allowed;
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 335px;
+}
+
+.submit-button.active {
+    background-color: var(--color-accent);
+    color: var(--color-background-light);
+    cursor: pointer;
+}
+
+/* Поля ввода СМС */
+.sms-input-container {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 335px;
+    justify-content: center;
+}
+
+.sms-input-field {
+    flex: 1;
+    height: 52px;
+    border: 1px solid var(--color-border-default);
+    border-radius: 16px;
+    background: var(--color-background-input);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.sms-input-field:first-child {
+    border-color: var(--color-border-focused);
+}
+
+.sms-input-field:focus-within {
+    border-color: var(--color-border-focused);
+    background: rgba(0, 124, 255, 0.1);
+}
+
+.sms-input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: transparent;
+    text-align: center;
+    font-family: var(--font-family-compact);
+    font-size: 17px;
+    color: var(--color-text-primary);
+    outline: none;
+    caret-color: var(--color-border-focused);
+}
+
+/* Ссылки */
+.link-cant-login {
+    font-family: var(--font-family-compact);
+    font-size: 17px;
+    line-height: 24px;
+    color: var(--color-link);
+    text-decoration: none;
+    text-align: left;
+    margin-top: 20px;
+}
+
+.sms-links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.sms-link {
+    font-family: var(--font-family-compact);
+    font-size: 17px;
+    line-height: 24px;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    text-align: left;
+    cursor: pointer;
+}
+
+.sms-link.primary {
+    color: var(--color-link);
+}
+
+.sms-link:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
+.form-footer {
+    margin-top: auto;
+    padding-top: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-content: left;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: left;
+    gap: 12px;
+}
+
+.footer-links a {
+    font-family: var(--font-family-compact);
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--color-link);
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+.legal-text,
+.copyright {
+    font-family: var(--font-family-compact);
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--color-text-secondary);
+    margin: 0;
+    text-align: left;
+}
+
+.legal-text a {
+    color: var(--color-link);
+    text-decoration: none;
+}
+
+.legal-text a:hover {
+    text-decoration: underline;
+}
+
+/* Адаптивность */
+@media (max-width: 375px) {
+    .page {
+        border-radius: 0;
+        height: 100vh;
+    }
+    body {
+        padding: 0;
+    }
+}

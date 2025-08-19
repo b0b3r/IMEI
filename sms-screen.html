@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMS от МТС</title>
+    <link rel="stylesheet" href="data/global.css">
+    <link rel="stylesheet" href="fonts.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Специфичные стили для SMS экрана */
+        .sms-screen {
+            width: 375px;
+            height: 812px;
+            background: #FFFFFF;
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Навбар */
+        .sms-navbar {
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(40px);
+            padding: 6px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-left, .nav-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-button {
+            width: 32px;
+            height: 32px;
+            border-radius: 12px;
+            border: none;
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .nav-button:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-title {
+            font-family: var(--font-family-compact);
+            font-weight: 500;
+            font-size: 17px;
+            color: var(--color-text-primary);
+            text-align: center;
+            flex: 1;
+        }
+
+        /* Дата */
+        .date-badge {
+            background: #F2F3F7;
+            border-radius: 10px;
+            padding: 4px 8px;
+            margin: 16px auto;
+            width: fit-content;
+        }
+
+        .date-text {
+            font-family: var(--font-family-compact);
+            font-weight: 500;
+            font-size: 14px;
+            color: #969FA8;
+        }
+
+        /* SMS сообщение */
+        .sms-message {
+            display: flex;
+            align-items: flex-end;
+            gap: 8px;
+            padding: 16px 20px 0px;
+        }
+
+        .avatar {
+            width: 44px;
+            height: 44px;
+            background: #BBC1C7;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .avatar-text {
+            font-family: var(--font-family-compact);
+            font-weight: 500;
+            font-size: 14px;
+            color: #FFFFFF;
+        }
+
+        .message-bubble {
+            background: #F2F3F7;
+            border-radius: 16px;
+            padding: 8px 16px;
+            flex: 1;
+            max-width: calc(100% - 52px);
+        }
+
+        .message-header {
+            margin-bottom: 4px;
+        }
+
+        .message-sender {
+            font-family: var(--font-family-compact);
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--color-text-primary);
+        }
+
+        .message-content {
+            font-family: var(--font-family-compact);
+            font-weight: 400;
+            font-size: 17px;
+            line-height: 1.41;
+            color: var(--color-text-primary);
+            margin-bottom: 8px;
+        }
+
+        .message-time {
+            font-family: var(--font-family-compact);
+            font-weight: 400;
+            font-size: 12px;
+            color: var(--color-text-primary);
+            opacity: 0.7;
+            text-align: right;
+        }
+
+        /* Иконки */
+        .icon-back {
+            width: 8px;
+            height: 16px;
+            background: var(--color-text-primary);
+            clip-path: polygon(0 50%, 100% 0, 100% 100%);
+        }
+
+        .icon-more {
+            width: 18px;
+            height: 4px;
+            background: var(--color-text-primary);
+            border-radius: 2px;
+            position: relative;
+        }
+
+        .icon-more::before,
+        .icon-more::after {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 4px;
+            background: var(--color-text-primary);
+            border-radius: 2px;
+        }
+
+        .icon-more::before {
+            top: -8px;
+        }
+
+        .icon-more::after {
+            top: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="sms-screen">
+        <!-- Навбар -->
+        <div class="sms-navbar">
+            <div class="nav-left">
+                <!-- <button class="nav-button">
+                    <div class="icon-back"></div>
+                </button> -->
+            </div>
+            <div class="nav-title">МТС</div>
+            <div class="nav-right">
+                <!-- <button class="nav-button">
+                    <div class="icon-more"></div>
+                </button> -->
+            </div>
+        </div>
+
+        <!-- Дата -->
+        <div class="date-badge">
+            <span class="date-text">Сегодня</span>
+        </div>
+
+        <!-- SMS сообщение -->
+        <div class="sms-message">
+            <div class="avatar">
+                <span class="avatar-text">М</span>
+            </div>
+            <div class="message-bubble">
+                <div class="message-header">
+                    <div class="message-sender">МТС</div>
+                </div>
+                <div class="message-content">
+                    Чтобы избежать блокировки связи, до 23.09.2025 свяжите ваше устройство и номер телефона МТС. Требование закона 126-ФЗ<br><br>
+                    Это можно сделать онлайн: <a href="login-enterphone.html" style="color: var(--color-link); text-decoration: none;">www.рrofile.mts.ru/imei</a><br><br>
+                    Также можете обратиться в любой удобный салон МТС: mts.ru/offices<br><br>
+                </div>
+                <div class="message-time">9:41</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

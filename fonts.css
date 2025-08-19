@@ -1,0 +1,115 @@
+/* Шрифты МТС - основной вариант через CDN */
+@font-face {
+    font-family: 'MTS Wide';
+    src: url('https://cdn.mts.ru/fonts/MTSWide-Regular.woff2') format('woff2'),
+         url('https://cdn.mts.ru/fonts/MTSWide-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'MTS Wide';
+    src: url('https://cdn.mts.ru/fonts/MTSWide-Medium.woff2') format('woff2'),
+         url('https://cdn.mts.ru/fonts/MTSWide-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'MTS Wide';
+    src: url('https://cdn.mts.ru/fonts/MTSWide-Bold.woff2') format('woff2'),
+         url('https://cdn.mts.ru/fonts/MTSWide-Bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'MTS Compact';
+    src: url('https://cdn.mts.ru/fonts/MTSCompact-Regular.woff2') format('woff2'),
+         url('https://cdn.mts.ru/fonts/MTSCompact-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'MTS Compact';
+    src: url('https://cdn.mts.ru/fonts/MTSCompact-Medium.woff2') format('woff2'),
+         url('https://cdn.mts.ru/fonts/MTSCompact-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Fallback шрифты для случаев CORS проблем */
+@font-face {
+    font-family: 'MTS Wide Fallback';
+    src: local('Arial Black'), local('Helvetica Bold'), local('Impact');
+    font-weight: 400 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'MTS Compact Fallback';
+    src: local('Segoe UI'), local('Helvetica Neue'), local('Arial');
+    font-weight: 400 500;
+    font-style: normal;
+}
+
+/* Альтернативные пути к шрифтам МТС */
+@font-face {
+    font-family: 'MTS Wide Alt';
+    src: url('https://fonts.mts.ru/MTSWide-Regular.woff2') format('woff2'),
+         url('https://fonts.mts.ru/MTSWide-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'MTS Wide Alt';
+    src: url('https://fonts.mts.ru/MTSWide-Medium.woff2') format('woff2'),
+         url('https://fonts.mts.ru/MTSWide-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'MTS Wide Alt';
+    src: url('https://fonts.mts.ru/MTSWide-Bold.woff2') format('woff2'),
+         url('https://fonts.mts.ru/MTSWide-Bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'MTS Compact Alt';
+    src: url('https://fonts.mts.ru/MTSCompact-Regular.woff2') format('woff2'),
+         url('https://fonts.mts.ru/MTSCompact-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'MTS Compact Alt';
+    src: url('https://fonts.mts.ru/MTSCompact-Medium.woff2') format('woff2'),
+         url('https://fonts.mts.ru/MTSCompact-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Fallback шрифты для случаев, когда шрифты МТС недоступны */
+.mts-wide {
+    font-family: 'MTS Wide', 'MTS Wide Alt', 'MTS Wide Fallback', 'Arial Black', 'Helvetica Bold', sans-serif;
+}
+
+.mts-compact {
+    font-family: 'MTS Compact', 'MTS Compact Alt', 'MTS Compact Fallback', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+}
