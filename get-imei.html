@@ -130,99 +130,86 @@
              fill: #FAFAFA;
          }
          </style>
-     <script>
-         // Определяем мобильное устройство
-         function isMobile() {
-             return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
-                    window.innerWidth <= 768;
-         }
-         
-         // Определяем операционную систему
-         function getOperatingSystem() {
-             const userAgent = navigator.userAgent;
-             
-             if (/iPhone|iPad|iPod/i.test(userAgent)) {
-                 return 'iOS';
-             } else if (/Android/i.test(userAgent)) {
-                 return 'Android';
-             } else if (/Windows Phone/i.test(userAgent)) {
-                 return 'WindowsPhone';
-             } else if (/BlackBerry/i.test(userAgent)) {
-                 return 'BlackBerry';
-             } else {
-                 return 'Unknown';
-             }
-         }
-         
-         // Получаем правильную команду для IMEI в зависимости от ОС
-         function getIMEICommand() {
-             const os = getOperatingSystem();
-             
-             switch (os) {
-                 case 'iOS':
-                     // Для iOS используем закодированную версию
-                     return 'tel:%2A%2306%23';
-                 case 'Android':
-                 case 'WindowsPhone':
-                 case 'BlackBerry':
-                     // Для Android и других используем обычную версию
-                     return 'tel:*#06#';
-                 default:
-                     // По умолчанию используем Android версию
-                     return 'tel:*#06#';
-             }
-         }
-         
-         // Обновляем ссылку на кнопке IMEI
-         function updateIMEIButton() {
-             const imeiButton = document.querySelector('#imei-button');
-             if (imeiButton) {
-                 const imeiCommand = getIMEICommand();
-                 imeiButton.href = imeiCommand;
-                 
-                 // Добавляем информацию в консоль для отладки
-                 console.log('OS detected:', getOperatingSystem());
-                 console.log('IMEI command:', imeiCommand);
-                 
-                 // Добавляем обработчик клика для дополнительной надежности
-                 imeiButton.addEventListener('click', function(e) {
-                     // Если по какой-то причине href не сработал, используем window.location
-                     if (imeiButton.href === '#' || imeiButton.href === window.location.href) {
-                         e.preventDefault();
-                         window.location.href = imeiCommand;
-                     }
-                 });
-             }
-         }
-         
-         // Применяем стили для мобильных устройств
-         function applyMobileStyles() {
-             if (isMobile()) {
-                 const page = document.querySelector('.page');
-                 const pageWrapper = document.querySelector('.page-wrapper');
-                 
-                 if (page) {
-                     page.style.width = '100vw';
-                     page.style.height = '100vh';
-                     page.style.maxWidth = '100%';
-                     page.style.maxHeight = '100vh';
-                     page.style.borderRadius = '0';
-                 }
-                 
-                 if (pageWrapper) {
-                     pageWrapper.style.width = '100vw';
-                     pageWrapper.style.height = '100vh';
-                 }
-             }
-         }
-         
-         // Применяем стили при загрузке и изменении размера окна
-         window.addEventListener('load', function() {
-             applyMobileStyles();
-             updateIMEIButton();
-         });
-         window.addEventListener('resize', applyMobileStyles);
-     </script>
+    <script>
+      // Определяем ОС по userAgent
+      function getOperatingSystem() {
+        const ua = navigator.userAgent;
+        if (/iPhone|iPad|iPod/i.test(ua)) return 'iOS';
+        if (/Android/i.test(ua)) return 'Android';
+        if (/Windows Phone/i.test(ua)) return 'WindowsPhone';
+        if (/BlackBerry/i.test(ua)) return 'BlackBerry';
+        return 'Unknown';
+      }
+    
+      // Возвращаем корректную схему tel: для IMEI
+      // iOS — не кодированная (*#06#), Android — percent-encoded (%2A%2306%23)
+      function getIMEICommand() {
+        const os = getOperatingSystem();
+        switch (os) {
+          case 'iOS':
+            return 'tel:*#06#';
+          case 'Android':
+            return 'tel:%2A%2306%23';
+          case 'WindowsPhone':
+          case 'BlackBerry':
+            return 'tel:*#06#';
+          default:
+            return 'tel:*#06#';
+        }
+      }
+    
+      // «Умный» апдейт одной кнопки
+      function updateIMEIButton() {
+        const imeiButton = document.querySelector('#imei-button');
+        if (!imeiButton) return;
+    
+        const imeiCommand = getIMEICommand();
+        // Ставим правильный href
+        imeiButton.setAttribute('href', imeiCommand);
+    
+        // На некоторых браузерах переход по href у <a> может блокироваться политиками —
+        // делаем мягкий fallback через window.location
+        imeiButton.addEventListener('click', function (e) {
+          // Если вдруг браузер решил не переходить по ссылке — подстрахуемся
+          // (оставляем preventDefault, чтобы точно сработал location.href)
+          e.preventDefault();
+          window.location.href = imeiCommand;
+        });
+    
+        // Удобно видеть в консоли, что выбрано
+        console.log('OS detected:', getOperatingSystem(), '→', imeiCommand);
+      }
+    
+      // Мобильные стили оставляем как у тебя
+      function isMobile() {
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+               window.innerWidth <= 768;
+      }
+    
+      function applyMobileStyles() {
+        if (!isMobile()) return;
+        const page = document.querySelector('.page');
+        const pageWrapper = document.querySelector('.page-wrapper');
+        if (page) {
+          page.style.width = '100vw';
+          page.style.height = '100vh';
+          page.style.maxWidth = '100%';
+          page.style.maxHeight = '100vh';
+          page.style.borderRadius = '0';
+        }
+        if (pageWrapper) {
+          pageWrapper.style.width = '100vw';
+          pageWrapper.style.height = '100vh';
+        }
+      }
+    
+      window.addEventListener('load', function () {
+        applyMobileStyles();
+        updateIMEIButton();
+      });
+      window.addEventListener('resize', applyMobileStyles);
+    </script>
+    
  </head>
  <body>
 <section class="page-wrapper">
