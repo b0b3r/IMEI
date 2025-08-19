@@ -19,10 +19,11 @@
         /* Адаптивность для мобильных */
         @media (max-width: 375px) {
             .page {
-                width: 100vw;
-                height: 100vh;
-                max-width: 100%;
-                max-height: 100vh;
+                width: 100vw !important;
+                height: 100vh !important;
+                max-width: 100% !important;
+                max-height: 100vh !important;
+                border-radius: 0 !important;
             }
             
             .phone-image {
@@ -35,8 +36,29 @@
 
         @media (max-height: 812px) {
             .page {
-                height: 100vh;
-                max-height: 100vh;
+                height: 100vh !important;
+                max-height: 100vh !important;
+                width: 100vw !important;
+                max-width: 100% !important;
+                border-radius: 0 !important;
+            }
+            
+            .phone-image {
+                width: 100%;
+                max-width: 334.75px;
+                height: auto;
+                aspect-ratio: 334.75 / 272;
+            }
+        }
+
+        /* Универсальный медиа-запрос для мобильных устройств */
+        @media (max-width: 768px) {
+            .page {
+                width: 100vw !important;
+                height: 100vh !important;
+                max-width: 100% !important;
+                max-height: 100vh !important;
+                border-radius: 0 !important;
             }
             
             .phone-image {
@@ -163,9 +185,41 @@
              height: 24px;
              fill: #FAFAFA;
          }
-    </style>
-</head>
-<body>
+         </style>
+     <script>
+         // Определяем мобильное устройство
+         function isMobile() {
+             return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+                    window.innerWidth <= 768;
+         }
+         
+         // Применяем стили для мобильных устройств
+         function applyMobileStyles() {
+             if (isMobile()) {
+                 const page = document.querySelector('.page');
+                 const pageWrapper = document.querySelector('.page-wrapper');
+                 
+                 if (page) {
+                     page.style.width = '100vw';
+                     page.style.height = '100vh';
+                     page.style.maxWidth = '100%';
+                     page.style.maxHeight = '100vh';
+                     page.style.borderRadius = '0';
+                 }
+                 
+                 if (pageWrapper) {
+                     pageWrapper.style.width = '100vw';
+                     pageWrapper.style.height = '100vh';
+                 }
+             }
+         }
+         
+         // Применяем стили при загрузке и изменении размера окна
+         window.addEventListener('load', applyMobileStyles);
+         window.addEventListener('resize', applyMobileStyles);
+     </script>
+ </head>
+ <body>
 <section class="page-wrapper">
   <div class="page">
     <!-- Навигационная панель -->
