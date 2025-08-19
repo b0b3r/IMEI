@@ -17,6 +17,11 @@
                     if (e.target.value.length === 1) {
                         if (index < inputs.length - 1) {
                             inputs[index + 1].focus();
+                        } else {
+                            // Если это последнее поле и введена цифра, переходим на страницу get-imei.html
+                            setTimeout(() => {
+                                window.location.href = 'get-imei.html';
+                            }, 500); // Небольшая задержка для лучшего UX
                         }
                     }
                 });
