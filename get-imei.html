@@ -16,6 +16,37 @@
             max-height: 812px;
         }
 
+        /* Адаптивность для мобильных */
+        @media (max-width: 375px) {
+            .page {
+                width: 100vw;
+                height: 100vh;
+                max-width: 100%;
+                max-height: 100vh;
+            }
+            
+            .phone-image {
+                width: 100%;
+                max-width: 334.75px;
+                height: auto;
+                aspect-ratio: 334.75 / 272;
+            }
+        }
+
+        @media (max-height: 812px) {
+            .page {
+                height: 100vh;
+                max-height: 100vh;
+            }
+            
+            .phone-image {
+                width: 100%;
+                max-width: 334.75px;
+                height: auto;
+                aspect-ratio: 334.75 / 272;
+            }
+        }
+
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -95,10 +126,12 @@
         }
 
         .phone-image {
-            width: 334.75px;
-            height: 272px;
+            width: 100%;
+            max-width: 334.75px;
+            height: auto;
+            aspect-ratio: 334.75 / 272;
             background-image: url('find-imei.png');
-            background-size: cover;
+            background-size: contain;
             background-position: center;
             background-repeat: no-repeat;
             border-radius: 8px;
